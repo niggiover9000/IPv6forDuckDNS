@@ -2,7 +2,8 @@
 # shellcheck source=/dev/null
 # Autoconfig for DuckDNS IPv4 & IPv6 Update Script v0.1
 # By James Watt 2017-05-12
-# This script is intended for hosts with an IPv4 NAT address and a public IPv6 address
+
+# Edited to only update IPv6.
 set -e
 
 # Paths
@@ -43,7 +44,7 @@ fi
 
 # Connect to DuckDNS
 printf "\nNow connecting to DuckDNS... "
-curl -s "https://www.duckdns.org/update?domains=$duckdomain&token=$ducktoken&ip=$ipv4addr&ipv6=$ipv6addr"
+curl -s "https://www.duckdns.org/update?domains=$duckdomain&token=$ducktoken&ip=$ipv6addr"
 
 # Write changes and create cronjob
 
