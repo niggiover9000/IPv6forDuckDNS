@@ -20,7 +20,7 @@ read -r -e -p "DuckDNS Token (E.g. a7c4d0ad-114e-40ef-ba1d-d217904a50f2): " duck
   
 # Connect to DuckDNS
 printf "\nNow connecting to DuckDNS... "
-echo url="https://www.duckdns.org/update?domains=$duckdomain&token=$ducktoken&ipv6=$ipv6addr&verbose=true"
+echo url="https://www.duckdns.org/update?domains=$duckdomain&token=$ducktoken&ipv6=$ipv6addr&verbose=true" | curl -k -o ~/duckdns/duck.log -K -
 
 # Write changes and create cronjob
 
