@@ -7,29 +7,20 @@
 set -e
 
 # Paths
-baseDir=$(cd "$(dirname "$0")" || exit; pwd -P)
-duck6conf="$HOME"/.duck6.conf
+##baseDir=$(cd "$(dirname "$0")" || exit; pwd -P)
+##duck6conf="$HOME"/.duck6.conf
 
 # Probe IPv4 and IPv6 addresses
 read -r _ _ _ _ iface _ ipv4local <<<"$(ip r g 8.8.8.8 | head -1)"
 ipv6addr=$(ip addr show dev "$iface" | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d' | grep -v '^fd00' | grep -v '^fe80' | head -1)
 
-# Does .duck6.conf exist?
-if [[ -f "$duck6conf" ]] ; then
-  source "$duck6conf"
-else
-  # Default IPv4 service
-  ipv4service="https://gtwy.net/ip/"
-  
-  # Questions
-  printf "Autoconfigure script by James Watt for DuckDNS.\nThis script should be run on the computer hosting the services you would like publicly accessible.\n\nCheck https://www.duckdns.org/domains for domain and token\n\n"
-  read -r -e -p "DuckDNS Subdomain (Do not include \".duckdns.org\"): " duckdomain
-  read -r -e -p "DuckDNS Token (E.g. a7c4d0ad-114e-40ef-ba1d-d217904a50f2): " ducktoken
-fi
+printf "Autoconfigure script by James Watt for DuckDNS.\nThis script should be run on the computer hosting the services you would like publicly accessible.\n\nCheck https://www.duckdns.org/domains for domain and token\n\n"
+read -r -e -p "DuckDNS Subdomain (Do not include \".duckdns.org\"): " duckdomain
+read -r -e -p "DuckDNS Token (E.g. a7c4d0ad-114e-40ef-ba1d-d217904a50f2): " ducktoken
   
 # Connect to DuckDNS
 printf "\nNow connecting to DuckDNS... "
-curl -s "https://www.duckdns.org/update?domains=$duckdomain&token=$ducktoken&ipv6=$ipv6addr&verbose=true"
+echo url="https://www.duckdns.org/update?domains=$duckdomain&token=$ducktoken&ipv6=$ipv6addr&verbose=true"
 
 # Write changes and create cronjob
 
