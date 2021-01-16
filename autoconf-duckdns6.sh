@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck source=/dev/null
-# Autoconfig for DuckDNS IPv4 & IPv6 Update Script v0.1
-# By James Watt 2017-05-12
-
+# Autoconfig for DuckDNS IPv6 Update Script v0.1
+# Based on the project of James Watt
 # Edited to only update IPv6.
+
 set -e
 
 # Paths
@@ -44,7 +44,7 @@ fi
 
 # Connect to DuckDNS
 printf "\nNow connecting to DuckDNS... "
-curl -s "https://www.duckdns.org/update?domains=$duckdomain&token=$ducktoken&ip=$ipv6addr"
+curl -s "https://www.duckdns.org/update?domains=$duckdomain&token=$ducktoken&ipv6=$ipv6addr"
 
 # Write changes and create cronjob
 
