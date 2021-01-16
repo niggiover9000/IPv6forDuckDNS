@@ -1,5 +1,5 @@
 # IPv6forDuckDNS
-Script to submit both IPv6 and IPv4 addresses to DuckDNS.
+Script to submit IPv6 only to DuckDNS.
 
 By default, DuckDNS cannot automatically resolve IPv6 addresses (See [DuckDNS FAQ](https://www.duckdns.org/faqs.jsp) for more details.) Using my script will allow you to easily and automatically submit your IPv4 and IPv6 addresses to DuckDNS.
 
