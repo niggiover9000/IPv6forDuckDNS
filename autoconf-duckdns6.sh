@@ -26,25 +26,9 @@ else
   read -r -e -p "DuckDNS Subdomain (Do not include \".duckdns.org\"): " duckdomain
   read -r -e -p "DuckDNS Token (E.g. a7c4d0ad-114e-40ef-ba1d-d217904a50f2): " ducktoken
   
-  if [[ "$ipv4local" =~ (^127\.)|(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(^192\.168\.) ]] ; then
-    printf "\nWe are detecting a local IPv4 address: %s\nYou must provide an ip4service to lookup your public address.\nPress enter for default lookup service.\n" "$ipv4local"
-    read -r -e -p "IPv4 Service [$ipv4service]: " Ripv4service
-    ipv4service=${Ripv4service:-$ipv4service}
-  else
-    ipv4service=""
-  fi
-fi
-
-# Get IPv4 Address
-if [[ -z $ipv4service ]] ; then
-  ipv4addr=$ipv4local
-else
-  ipv4addr=$(curl --ipv4 -s "${ipv4service}")
-fi
-
 # Connect to DuckDNS
 printf "\nNow connecting to DuckDNS... "
-curl -s "https://www.duckdns.org/update?domains=$duckdomain&token=$ducktoken&ipv6=$ipv6addr"
+curl -s "https://www.duckdns.org/update?domains=$duckdomain&token=$ducktoken&ipv6=$ipv6addr&verbose=true"
 
 # Write changes and create cronjob
 
