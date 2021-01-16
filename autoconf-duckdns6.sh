@@ -3,7 +3,6 @@
 # Autoconfig for DuckDNS IPv6 Update Script v0.1
 # Based on the project of James Watt
 # Edited to only update IPv6.
-
 set -e
 
 # Paths
@@ -14,9 +13,15 @@ duck6conf="$HOME"/.duck6.conf
 read -r _ _ _ _ iface _ ipv4local <<<"$(ip r g 8.8.8.8 | head -1)"
 ipv6addr=$(ip addr show dev "$iface" | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d' | grep -v '^fd00' | grep -v '^fe80' | head -1)
 
-printf "Autoconfigure script by James Watt for DuckDNS.\nThis script should be run on the computer hosting the services you would like publicly accessible.\n\nCheck https://www.duckdns.org/domains for domain and token\n\n"
-read -r -e -p "DuckDNS Subdomain (Do not include \".duckdns.org\"): " duckdomain
-read -r -e -p "DuckDNS Token (E.g. a7c4d0ad-114e-40ef-ba1d-d217904a50f2): " ducktoken
+# Does .duck6.conf exist?
+if [[ -f "$duck6conf" ]] ; then
+  source "$duck6conf"
+else
+  # Questions
+  printf "Autoconfigure script by James Watt for DuckDNS.\nThis script should be run on the computer hosting the services you would like publicly accessible.\n\nCheck https://www.duckdns.org/domains for domain and token\n\n"
+  read -r -e -p "DuckDNS Subdomain (Do not include \".duckdns.org\"): " duckdomain
+  read -r -e -p "DuckDNS Token (E.g. a7c4d0ad-114e-40ef-ba1d-d217904a50f2): " ducktoken
+fi
   
 # Connect to DuckDNS
 printf "\nNow connecting to DuckDNS and pushing your IPv6 $ipv6addr for domain $duckdomain.duckdns.org with Token $ducktoken."
