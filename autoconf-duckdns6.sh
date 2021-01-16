@@ -7,8 +7,8 @@
 set -e
 
 # Paths
-##baseDir=$(cd "$(dirname "$0")" || exit; pwd -P)
-##duck6conf="$HOME"/.duck6.conf
+baseDir=$(cd "$(dirname "$0")" || exit; pwd -P)
+duck6conf="$HOME"/.duck6.conf
 
 # Probe IPv4 and IPv6 addresses
 read -r _ _ _ _ iface _ ipv4local <<<"$(ip r g 8.8.8.8 | head -1)"
