@@ -24,7 +24,8 @@ else
 fi
   
 # Connect to DuckDNS
-printf "\nNow connecting to DuckDNS and pushing your IPv6 $ipv6addr for domain $duckdomain.duckdns.org with Token $ducktoken."
+printf "\nNow connecting to DuckDNS and pushing your IPv6 $ipv6addr"
+printf "\nfor domain $duckdomain.duckdns.org with Token $ducktoken."
 echo url="https://www.duckdns.org/update?domains=$duckdomain&token=$ducktoken&ipv6=$ipv6addr&verbose=True" | curl -k -o ~/duckdns/duck.log -K -
 
 # Write changes and create cronjob
