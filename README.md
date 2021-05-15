@@ -1,3 +1,5 @@
+This script is based on a script by https://github.com/gtwy
+
 # IPv6forDuckDNS
 Script to submit IPv6 only to DuckDNS.
 
